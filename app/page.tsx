@@ -1,12 +1,9 @@
 import { Button } from "@/components/ui/button";
-
+import Mainbody from "@/components/homepage/mainbody";
 export default function Home() {
   return (
-    <div >
-
-      <h1>Hello World</h1>
-      <Button>Click me</Button>
-
+    <div className="relative w-full" >
+      <Mainbody />
     </div>
   );
 }
