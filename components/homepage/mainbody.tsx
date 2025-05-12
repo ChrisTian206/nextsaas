@@ -22,7 +22,15 @@ const Mainbody = () => {
 
             </div>
 
-            <h1 className='font-bold py-6 text-center'>All you PDFs, Make Your Personalized AI</h1>
+            <h1 className='font-bold py-6 text-center'>
+                All you PDFs, Make Your{` `}
+                <span className='relative inline-block'>
+                    <span className='relative z-10 px-2'>Personalized</span>
+                    <span className='absolute inset-0 bg-rose-200/50 -rotate-2
+                    rounded-lg transform -skew-y-1'></span>
+                </span>
+                {` `}AI
+            </h1>
             <h2 className="text-lg sm:text-xl lg:text-2xl text-center 
               px-4 lg:px-0 max-w-4xl text-gray-400">Chat with your PDFs using your own data</h2>
             <Button
