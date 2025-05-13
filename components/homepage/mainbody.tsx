@@ -10,7 +10,7 @@ const Mainbody = () => {
 
             <div className='flex'>
                 <div className='relative p-[1px] overflow-hidden rounded-full 
-                bg-linear-to-r from-rose-200 via-rose-500 to-rose-800
+                bg-linear-to-r from-orange-200 via-orange-500 to-orange-700
                 animate-gradient-x group'>
                     <Badge variant={"secondary"} className="relative px-6 py-2 text-base 
                         font-medium bg-white rounded-full group-hover:bg-gray-50 
@@ -26,7 +26,7 @@ const Mainbody = () => {
                 All you PDFs, Make Your{` `}
                 <span className='relative inline-block'>
                     <span className='relative z-10 px-2'>Personalized</span>
-                    <span className='absolute inset-0 bg-rose-200/50 -rotate-2
+                    <span className='absolute inset-0 bg-orange-300/50 -rotate-2
                     rounded-lg transform -skew-y-1'></span>
                 </span>
                 {` `}AI
