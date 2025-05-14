@@ -1,5 +1,6 @@
-import { FileText } from 'lucide-react';
+import { BookCheck, BrainCircuit, FileText } from 'lucide-react';
 import React, { ReactNode } from 'react'
+import StepItem from './StepItem';
 
 type Step = {
     icon: ReactNode;
@@ -14,14 +15,14 @@ const steps: Step[] = [
         description: "Those files will form a knowledge base"
     },
     {
-        icon: <FileText size={64} strokeWidth={1.5} />,
-        label: "Upload Your Files",
-        description: "Those files will form a knowledge base"
+        icon: <BrainCircuit size={64} strokeWidth={1.5} />,
+        label: "AI Analysis",
+        description: "Our advanced AI workflow will analyze your files instantly"
     },
     {
-        icon: <FileText size={64} strokeWidth={1.5} />,
-        label: "Upload Your Files",
-        description: "Those files will form a knowledge base"
+        icon: <BookCheck size={64} strokeWidth={1.5} />,
+        label: "Your Assistant is Ready",
+        description: "Here you have your AI tailored to your documents."
     }
 ]
 
@@ -52,8 +53,8 @@ const WalkTrou = () => {
             <div className='grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto relative'>
                 {
                     steps.map((step, index) => {
-                        return <div>
-
+                        return <div className='relative p-'>
+                            <StepItem {...step} />
                         </div>
                     }
                     )
