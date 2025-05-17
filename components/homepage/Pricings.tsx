@@ -1,4 +1,5 @@
 import React from 'react'
+import PricingCard from './PricingCard'
 
 const plans = [
     {
@@ -42,7 +43,9 @@ const Pricings = () => {
                 lg:items-stretch gap-8'>
                     {
                         plans.map((plan, index) => (
-                            <div>plan</div>
+                            <div key={index}>
+                                <PricingCard {...plan} />
+                            </div>
                         )
                         )
                     }
