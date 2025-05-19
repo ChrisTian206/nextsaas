@@ -37,7 +37,7 @@ const Mainbody = () => {
                 variant="link"
                 className="group text-base sm:mt-6 text-white sm:text-l lg:text-xl
                 rounded-full px-16 sm:px-20 lg:px-28 py-6 sm:py-7 lg:py-8 bg-linear-to-r from-slate-900 to-orange-800
-                hover:from-orange-800 hover:to-slate-900 transition-all duration-300 transform hover:scale-105"
+                hover:from-orange-800 hover:to-slate-900 transition-all duration-300 ease-in-out transform hover:scale-105"
             >
                 Try ChatPDF
                 <ArrowRight className="w-6 h-6 ml-2 animate-pulse transition-transform duration-300 group-hover:translate-x-2" />

@@ -34,10 +34,10 @@ const plans = [
 
 const Pricings = () => {
     return (
-        <section>
+        <section className='relative overflow-hidden' id="pricings">
             <div className='py-12 lg:py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 lg:pt-12'>
-                <div>
-                    <h2>Pricings</h2>
+                <div className='flex items-center justify-center w-full pb-12'>
+                    <h2 className='uppercase font-blod text-xl mb-8 text-orange-500'>Pricings</h2>
                 </div>
                 <div className='relative flex justify-center flex-col lg:flex-row items-center
                 lg:items-stretch gap-8'>
