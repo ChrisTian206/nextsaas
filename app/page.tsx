@@ -4,6 +4,7 @@ import GradientBg from "@/components/common/GradientBg";
 import Demos from "@/components/homepage/Demos";
 import WalkTrou from "@/components/homepage/WalkTrou";
 import Pricings from "@/components/homepage/Pricings";
+import CTAcard from "@/components/homepage/CTAcard";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <Demos />
         <WalkTrou />
         <Pricings />
+        <CTAcard />
       </div>
     </div>
 
