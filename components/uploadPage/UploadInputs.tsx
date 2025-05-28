@@ -1,16 +1,16 @@
+'use client'
+
 import React from 'react'
-import { Button } from '../ui/button'
-import { ArrowBigUp } from 'lucide-react'
+import UploadFormInput from './UploadFormInput'
 
 const UploadInputs = () => {
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        alert("Mimic: form submitted")
+    }
     return (
-        <div>
-            <form action="" className='flex flex-col gap-2'>
-                <input type="text" />
-                <Button className='bg-orange-400'>
-                    Uplod Your Files <ArrowBigUp />
-                </Button>
-            </form>
+        <div className='flex flex-col gap-8 w-full max-w-2xl mx-auto'>
+            <UploadFormInput onSubmit={handleSubmit} />
         </div>
     )
 }
