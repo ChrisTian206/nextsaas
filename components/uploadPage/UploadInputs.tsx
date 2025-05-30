@@ -4,6 +4,7 @@ import React from 'react'
 import UploadFormInput from './UploadFormInput'
 import { z } from 'zod'
 import { useUploadThing } from '@/utils/uploadthings'
+import { toast } from "sonner"
 
 //schema for upload file validation
 const schema = z.object({
@@ -24,7 +25,10 @@ const UploadInputs = () => {
     const { startUpload, routeConfig } = useUploadThing(
         'pdfUploader', {
         onClientUploadComplete: () => console.log("Upload Success"),
-        onUploadError: () => console.error("error occur while uploading"),
+        onUploadError: (err) => {
+            console.error("error occur while uploading"),
+                toast("error")
+        },
         onUploadBegin: (file) => console.log('upload began:', file)
     }
     )
