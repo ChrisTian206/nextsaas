@@ -17,11 +17,11 @@ export const fileRouter = {
         })
         .onUploadComplete(
             async ({ metadata, file }) => {
-                console.log(`upload complete for user ${metadata.userId}`)
-                console.log('file url', file.url)
+                //console.log(`upload complete for user ${metadata.userId}`)
+                //console.log('file url', file.url)
                 return {
                     userId: metadata.userId,
-                    file: file.url,
+                    file: file
                 }
             }
         )
