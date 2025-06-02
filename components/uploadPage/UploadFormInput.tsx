@@ -2,14 +2,15 @@
 
 import React from 'react'
 import { Button } from '../ui/button'
-import { ArrowBigUp } from 'lucide-react'
+import { ArrowBigUp, Hourglass } from 'lucide-react'
 import { Input } from '../ui/input'
 
 interface UploadFormInputProp {
     onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+    isUploading?: boolean;
 }
 
-const UploadFormInput = ({ onSubmit }: UploadFormInputProp) => {
+const UploadFormInput = ({ onSubmit, isUploading }: UploadFormInputProp) => {
     return (
         <div>
             <form action="" className='flex flex-col gap-2' onSubmit={onSubmit}>
@@ -21,8 +22,16 @@ const UploadFormInput = ({ onSubmit }: UploadFormInputProp) => {
                         required
                         accept='application/pdf'
                         className='' />
-                    <Button className='bg-orange-400'>
-                        Uplod Your Files <ArrowBigUp />
+                    <Button className='bg-orange-400' disabled={isUploading}>
+                        {isUploading ? (
+                            <div className="flex items-center gap-2">
+                                Uploading ... <Hourglass />
+                            </div>
+                        ) : (
+                            <div className="flex items-center gap-2">
+                                Upload Your Files <ArrowBigUp />
+                            </div>
+                        )}
                     </Button>
                 </div>
 

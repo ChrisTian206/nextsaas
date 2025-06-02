@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import UploadFormInput from './UploadFormInput'
 import { z } from 'zod'
 import { useUploadThing } from '@/utils/uploadthings'
@@ -21,15 +21,25 @@ const schema = z.object({
 })
 
 const UploadInputs = () => {
+    const [isUploading, setIsUploading] = useState(false)
 
     const { startUpload, routeConfig } = useUploadThing(
         'pdfUploader', {
-        onClientUploadComplete: () => console.log("Upload Success"),
-        onUploadError: (err) => {
-            console.error("error occur while uploading"),
-                toast("error")
+        onClientUploadComplete: () => {
+            setIsUploading(false);
+            console.log("Upload Success")
         },
-        onUploadBegin: (file) => console.log('upload began:', file)
+        onUploadError: (err) => {
+            setIsUploading(false);
+            console.error("error occur while uploading"),
+                toast.error("❌ Error Occur", {
+                    description: "error occur while uploading"
+                })
+        },
+        onUploadBegin: (file) => {
+            setIsUploading(true);
+            console.log('upload began:', file)
+        }
     }
     )
 
@@ -41,7 +51,7 @@ const UploadInputs = () => {
         const file = formData.get('file') as File;
 
         if (!file || !(file instanceof File)) {
-            console.log("No file selected or not a File instance");
+            console.error("No file selected or not a File instance");
             return;
         }
 
@@ -49,20 +59,40 @@ const UploadInputs = () => {
 
         //Validating file, before proceeding a backend call
         const isValid = schema.safeParse({ file })
+
         //console.log("isValid: ", isValid)
         if (!isValid.success) {
-            console.log(isValid.error.flatten().fieldErrors.file?.[0] ?? "Invalid File")
+            toast.error("❌ Error Occur", {
+                description: "Please check the size and format of uploaded file."
+            })
             return;
         }
 
         //upload the file to UploadThings
+        toast('Uploading file...', {
+            description: 'Your file is uploading. This may take a moment.',
+            icon: '⏳',
+        });
+
+        setIsUploading(true);
         const response = await startUpload([file])
+        setIsUploading(false);
         //console.log("response: ", response)
-        if (!response) return;
+        if (!response) {
+            toast.error("Upload failed", {
+                description: "Please try a different file or try again.",
+            })
+            return
+        } else {
+            toast('✅ Done!', {
+                description: 'Your file has been uploaded!',
+                icon: '⏳',
+            });
+        }
     }
     return (
         <div className='flex flex-col gap-8 w-full max-w-2xl mx-auto'>
-            <UploadFormInput onSubmit={handleSubmit} />
+            <UploadFormInput onSubmit={handleSubmit} isUploading={isUploading} />
         </div>
     )
 }
