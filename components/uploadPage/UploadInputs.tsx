@@ -5,6 +5,7 @@ import UploadFormInput from './UploadFormInput'
 import { z } from 'zod'
 import { useUploadThing } from '@/utils/uploadthings'
 import { toast } from "sonner"
+import { generatePdfSummary } from '@/actions/upload-actions'
 
 //schema for upload file validation
 const schema = z.object({
@@ -91,8 +92,11 @@ const UploadInputs = () => {
             });
         }
 
-        //console.log("response: ", response)
+        console.log("response: ", response)
         //this will show an array of responses, each is a JSON tells file url, who's the owner, size, type, etc.
+
+        // const summary = await generatePdfSummary(response);
+        // console.log("summary: ", summary)
     }
     return (
         <div className='flex flex-col gap-8 w-full max-w-2xl mx-auto'>
