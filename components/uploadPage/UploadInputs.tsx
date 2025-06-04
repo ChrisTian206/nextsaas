@@ -48,47 +48,51 @@ const UploadInputs = () => {
         //console.log("Mimic: form submitted")
 
         const formData = new FormData(e.currentTarget);
-        const file = formData.get('file') as File;
+        const files = formData.getAll('file').filter(f => f instanceof File) as File[];
 
-        if (!file || !(file instanceof File)) {
-            console.error("No file selected or not a File instance");
+        if (!files.length) {
+            console.error("No files selected or not File instances");
             return;
         }
 
-        //console.log('file:', file, 'instanceof File:', file instanceof File);
-
-        //Validating file, before proceeding a backend call
-        const isValid = schema.safeParse({ file })
-
-        //console.log("isValid: ", isValid)
-        if (!isValid.success) {
-            toast.error("❌ Error Occur", {
-                description: "Please check the size and format of uploaded file."
-            })
-            return;
+        // Validate each file
+        for (const file of files) {
+            const isValid = schema.safeParse({ file });
+            if (!isValid.success) {
+                toast.error("❌ Error Occur", {
+                    description: "Please check the size and format of uploaded file."
+                });
+                return;
+            }
         }
 
-        //upload the file to UploadThings
-        toast('Uploading file...', {
-            description: 'Your file is uploading. This may take a moment.',
+        // Upload all files
+        toast('Uploading files...', {
+            description: 'Your files are uploading. This may take a moment.',
             icon: '⏳',
         });
 
         setIsUploading(true);
-        const response = await startUpload([file])
+        let response = null
+        for (const file of files) {
+            response = response ? [...response, await startUpload([file])] : await startUpload([file])
+        }
         setIsUploading(false);
-        //console.log("response: ", response)
+
         if (!response) {
             toast.error("Upload failed", {
-                description: "Please try a different file or try again.",
-            })
-            return
+                description: "Please try different files or try again.",
+            });
+            return;
         } else {
-            toast('✅ Done!', {
-                description: 'Your file has been uploaded!',
+            toast('✅ Done! Analyzing files...', {
+                description: 'AI is analyzing your files. This may take a moment.',
                 icon: '⏳',
             });
         }
+
+        //console.log("response: ", response)
+        //this will show an array of responses, each is a JSON tells file url, who's the owner, size, type, etc.
     }
     return (
         <div className='flex flex-col gap-8 w-full max-w-2xl mx-auto'>

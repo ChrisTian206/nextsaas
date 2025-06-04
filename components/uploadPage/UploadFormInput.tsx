@@ -20,6 +20,7 @@ const UploadFormInput = ({ onSubmit, isUploading }: UploadFormInputProp) => {
                         type="file"
                         name='file'
                         required
+                        multiple
                         accept='application/pdf'
                         className='' />
                     <Button className='bg-orange-400' disabled={isUploading}>
