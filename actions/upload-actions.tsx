@@ -6,7 +6,7 @@ export async function generatePdfSummary(uploadResponse: [{
     serverData: {
         userId: string,
         file: {
-            url: string,
+            ufsUrl: string,
             name: string,
             size: number,
             type: string,
@@ -24,7 +24,7 @@ export async function generatePdfSummary(uploadResponse: [{
     const {
         serverData: {
             userId,
-            file: { url: pdfUrl, name: fileName },
+            file: { ufsUrl: pdfUrl, name: fileName },
         } } = uploadResponse[0]
 
     if (!pdfUrl) {
@@ -37,6 +37,7 @@ export async function generatePdfSummary(uploadResponse: [{
 
     try {
         const pdf = await extractPdfText(pdfUrl)
+        return pdf;
     } catch (error) {
         return {
             success: false,

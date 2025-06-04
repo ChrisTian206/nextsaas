@@ -74,9 +74,12 @@ const UploadInputs = () => {
         });
 
         setIsUploading(true);
-        let response = null
+        let response: any[] = [];
         for (const file of files) {
-            response = response ? [...response, await startUpload([file])] : await startUpload([file])
+            const uploadResult = await startUpload([file]);
+            if (uploadResult) {
+                response = [...response, ...uploadResult]; // Spread to flatten
+            }
         }
         setIsUploading(false);
 
@@ -95,8 +98,12 @@ const UploadInputs = () => {
         console.log("response: ", response)
         //this will show an array of responses, each is a JSON tells file url, who's the owner, size, type, etc.
 
-        // const summary = await generatePdfSummary(response);
-        // console.log("summary: ", summary)
+        // Loop through each uploaded file response and generate a summary
+        for (const uploadResult of response) {
+            // Ensure we pass the correct type: an array with a single upload result object
+            const summary = await generatePdfSummary([uploadResult]);
+            console.log("summary: ", summary)
+        }
     }
     return (
         <div className='flex flex-col gap-8 w-full max-w-2xl mx-auto'>
